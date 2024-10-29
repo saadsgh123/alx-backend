@@ -67,6 +67,7 @@ class Server:
         infos = {
             'page_size': page_size,
             'page': page,
+            'total_pages': total_pages,
             'data': self.get_page(page, page_size),
             'prev_page': page - 1 if page > 1 else None,
             'next_page': page + 1 if page + 1 <= total_pages else None

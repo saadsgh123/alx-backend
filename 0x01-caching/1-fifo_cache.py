@@ -6,43 +6,29 @@ from base_caching import BaseCaching
 
 class FIFOCache(BaseCaching):
     """
-    Defines a class for caching information in key-value pairs
-        Methods:
-            put(key, item) - store a key-value pair
-            get(key) - retrieve the value associated with a key
+    FIFOCache defines a FIFO caching system
     """
 
     def __init__(self):
         """
-            Return the value linked to a given key, or None
+        Initialize the class with the parent's init method
         """
-        BaseCaching.__init__(self)
-
-    def distract(self):
-        """
-            Return the value linked to a given key, or None
-        """
-        ordered_key = []
-        for key in self.cache_data.keys():
-            ordered_key.append(ord(key))
-        for _ in ordered_key:
-            for i in range(len(ordered_key) - 1):
-                if ordered_key[i] > ordered_key[i + 1]:
-                    temp = ordered_key[i]
-                    ordered_key[i] = ordered_key[i + 1]
-                    ordered_key[i + 1] = temp
-        del self.cache_data[chr(ordered_key[0])]
-        print("DISCARD: {}".format(chr(ordered_key[0])))
+        super().__init__()
+        self.order = []
 
     def put(self, key, item):
         """
-            Return the value linked to a given key, or None
+        Cache a key-value pair
         """
         if key is None or item is None:
             pass
         else:
-            if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-                self.distract()
+            length = len(self.cache_data)
+            if length >= BaseCaching.MAX_ITEMS and key not in self.cache_data:
+                print("DISCARD: {}".format(self.order[0]))
+                del self.cache_data[self.order[0]]
+                del self.order[0]
+            self.order.append(key)
             self.cache_data[key] = item
 
     def get(self, key):

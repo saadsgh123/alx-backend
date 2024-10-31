@@ -22,8 +22,8 @@ class BasicCache(BaseCaching):
         """
         Store a key-value pair
         Args:
-            Key
-            Item
+            :param item:
+            :param key:
         """
         if key is None or item is None:
             pass

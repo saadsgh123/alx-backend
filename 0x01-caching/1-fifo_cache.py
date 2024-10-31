@@ -13,9 +13,15 @@ class FIFOCache(BaseCaching):
     """
 
     def __init__(self):
+        """
+            Return the value linked to a given key, or None
+        """
         BaseCaching.__init__(self)
 
     def distract(self):
+        """
+            Return the value linked to a given key, or None
+        """
         ordered_key = []
         for key in self.cache_data.keys():
             ordered_key.append(ord(key))
@@ -29,6 +35,9 @@ class FIFOCache(BaseCaching):
         print("DISCARD: {}".format(chr(ordered_key[0])))
 
     def put(self, key, item):
+        """
+            Return the value linked to a given key, or None
+        """
         if key is None or item is None:
             pass
         else:
@@ -43,18 +52,3 @@ class FIFOCache(BaseCaching):
         if key is not None and key in self.cache_data.keys():
             return self.cache_data[key]
         return None
-
-
-if __name__ == '__main__':
-    my_cache = FIFOCache()
-    my_cache.put("A", "Hello")
-    my_cache.put("B", "World")
-    my_cache.put("C", "Holberton")
-    my_cache.put("D", "School")
-    my_cache.print_cache()
-    my_cache.put("E", "Battery")
-    my_cache.print_cache()
-    my_cache.put("C", "Street")
-    my_cache.print_cache()
-    my_cache.put("F", "Mission")
-    my_cache.print_cache()
